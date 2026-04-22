@@ -1,7 +1,6 @@
 
 import java.awt.*;
 import javax.swing.*;
-
 //Clase abstracta que solo puede crear hijos que seran las ventanas separadas
 abstract class PanelBase extends JPanel {
 
@@ -25,7 +24,7 @@ abstract class PanelBase extends JPanel {
     Dimension RIGIDAREA_SIZE = new Dimension(0, 15);
 
     //Nombres de los botones de la barra lateral
-    String[] nombreBotones = {"", "Inicio", "Estadisticas", "Recompensas", "Mapa", "Cuenta", "Configuracion", "About Us"};
+    String[] nombreBotones = {"", "Inicio", "Estadisticas", "Rewards3", "Mapa", "Cuenta", "Configuracion", "About Us"};
 
     //Atributos que solo los hijos pueden usar
     protected JLabel titulo; //titulo de la pantalla
@@ -109,9 +108,10 @@ abstract class PanelBase extends JPanel {
 
                 //Añade eventos al presioar los botones
                 boton.addActionListener(e -> {
+                System.out.println("¡Botón presionado: " + nombre + "!");
                     choosePanel(nombre);
                 });
-                
+
                 if (extendido == false) {
                     boton.setVisible(false); //Para que no se vea por defecto hasta que se extienda el panel
                 }
@@ -155,7 +155,7 @@ abstract class PanelBase extends JPanel {
     //Metodo que cambia entre ventanas en el panel principal
     private void choosePanel(String screenName) {
         CardLayout cl = (CardLayout) (panelPrincipal.getLayout());
-
+        
         cl.show(panelPrincipal, screenName);
     }
 }

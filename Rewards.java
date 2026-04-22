@@ -1,7 +1,8 @@
-import javax.swing.*;
-import java.awt.event.*;
 
-public class Rewards extends JFrame implements ActionListener {
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Rewards extends JPanel implements ActionListener {
 
     // Constantes para los valores de puntos
     private static final int PUNTOS_AGREGAR = 50;
@@ -34,11 +35,7 @@ public class Rewards extends JFrame implements ActionListener {
         btnCanjear.addActionListener(this);
         add(btnCanjear);
 
-        setTitle("Rewards");
         setBounds(0, 0, 350, 250);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void verificarNivel() {
