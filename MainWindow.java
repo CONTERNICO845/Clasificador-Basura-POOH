@@ -1,3 +1,4 @@
+//Codigo hecho por el God Giovanni Sandoval
 import javax.swing.*;
 
 class MiPanel extends PanelBase {
@@ -8,6 +9,9 @@ class MiPanel extends PanelBase {
         //Para todas las ventanas
         Rewards panelRecompensas = new Rewards();
         panelPrincipal.add(panelRecompensas, "Rewards");
+
+        About_Us panelAbout_Us = new About_Us();
+        panelPrincipal.add(panelAbout_Us, "About Us");
     }
 }
 

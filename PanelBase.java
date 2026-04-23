@@ -1,4 +1,4 @@
-
+//Codigo hecho por el God Giovanni Sandoval
 import java.awt.*;
 import javax.swing.*;
 //Clase abstracta que solo puede crear hijos que seran las ventanas separadas
@@ -24,7 +24,7 @@ abstract class PanelBase extends JPanel {
     Dimension RIGIDAREA_SIZE = new Dimension(0, 15);
 
     //Nombres de los botones de la barra lateral
-    String[] nombreBotones = {"", "Inicio", "Estadisticas", "Rewards3", "Mapa", "Cuenta", "Configuracion", "About Us"};
+    static final String[] nombreBotones = {"", "Inicio", "Estadisticas", "Rewards", "Mapa", "Cuenta", "Configuracion", "About Us"};
 
     //Atributos que solo los hijos pueden usar
     protected JLabel titulo; //titulo de la pantalla
@@ -84,7 +84,7 @@ abstract class PanelBase extends JPanel {
                 //Hace transparente al boton que extiende el panel
                 boton.setOpaque(false);
                 boton.setContentAreaFilled(false);
-                boton.setBorderPainted(true);
+                boton.setBorderPainted(false);
                 boton.setMinimumSize(BUTTON_HOME_SIZE);
                 boton.setMaximumSize(BUTTON_HOME_SIZE);
 
