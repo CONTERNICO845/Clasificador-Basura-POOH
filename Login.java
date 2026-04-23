@@ -1,3 +1,4 @@
+import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -138,8 +139,23 @@ public class Login extends JFrame {
             gbc.insets = new Insets(20, 8, 8, 8); 
             gbc.fill = GridBagConstraints.NONE; 
             
+            
             add(panelBotones, gbc);
 
+            btnIniciar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // LEER LOS DATOS
+                    String correo = txtCorreo.getText();
+                    
+                    // Para JPasswordField se recomienda getPassword() por seguridad
+                    String password = new String(txtPass.getPassword());
+
+                    System.out.println("Correo guardado: " + correo);
+                    System.out.println("Contraseña guardada: " + password);
+
+                }
+            });
         }
     }
 
