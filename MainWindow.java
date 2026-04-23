@@ -6,7 +6,7 @@ class MiPanel extends PanelBase {
     public MiPanel(String name) {
         super(name);
 
-        //Para todas las ventanas
+        //Para todas las ventanas, las agrega a un Cardlayout para poderlas intercambiar una a una
         Rewards panelRecompensas = new Rewards();
         panelPrincipal.add(panelRecompensas, "Rewards");
 

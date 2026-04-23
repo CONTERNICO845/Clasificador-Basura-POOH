@@ -8,7 +8,7 @@ public class Login extends JFrame {
     private final Color COLOR_IZQUIERDO = new Color(34, 60, 43);    // Verde ecológico vivo 43, 153, 99
     private final Color COLOR_DERECHO = new Color(43, 153, 99);       // Verde bosque oscuro 34, 60, 43
     private final Color COLOR_TEXTO = new Color(255, 255, 255);      // Blanco puro para textos
-   
+
 
     public Login() {
         setTitle("Login");

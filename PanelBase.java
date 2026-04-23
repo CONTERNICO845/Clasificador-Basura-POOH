@@ -17,6 +17,9 @@ abstract class PanelBase extends JPanel {
     //Constantes para los colores a usar
     private static final Color COLOR_VERDE_PRIMARIO = new Color(76, 175, 80);
     private static final Color COLOR_GRIS_PRIMARIO = new Color(230, 230, 230);
+    private static  final Color COLOR_FONDO_MAIN = new Color(189, 236, 182); 
+    private final Color COLOR_IZQUIERDO = new Color(34, 60, 43);    // Verde ecológico vivo 43, 153, 99
+    private final Color COLOR_DERECHO = new Color(43, 153, 99);
 
     //Variables para los botones
     Dimension BUTTON_HOME_SIZE = new Dimension(50, 50);
@@ -45,14 +48,14 @@ abstract class PanelBase extends JPanel {
 
         //Configura el panel superior del titulo y perfil
         panelSuperior = new JPanel();
-        panelSuperior.setBackground(COLOR_GRIS_PRIMARIO);
+        panelSuperior.setBackground(COLOR_DERECHO);
         panelSuperior.setLayout(new BorderLayout());
         this.add(panelSuperior, BorderLayout.NORTH);
 
         //Configura un titulo para todas las ventanas
         titulo = new JLabel(textoTitulo, SwingConstants.CENTER);
         titulo.setFont(new Font("SansSerif", Font.BOLD, 26));
-        titulo.setForeground(new Color(45, 45, 45)); // Gris oscuro
+        titulo.setForeground(new Color(255, 255, 255)); 
         titulo.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         panelSuperior.add(titulo, BorderLayout.CENTER);
 
@@ -69,7 +72,7 @@ abstract class PanelBase extends JPanel {
         panelLateral = new JPanel();
         //panelLateral.setLayout(new GridLayout(10, 1, 0, 5));
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
-        panelLateral.setBackground(COLOR_GRIS_PRIMARIO);
+        panelLateral.setBackground(COLOR_DERECHO);
         panelLateral.setPreferredSize(new Dimension(ANCHO_CERRADO, 0));
         this.add(panelLateral, BorderLayout.WEST);
 
@@ -89,7 +92,7 @@ abstract class PanelBase extends JPanel {
                 boton.setMaximumSize(BUTTON_HOME_SIZE);
 
                 //Le agrega la imagen ☰ al boton
-                ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/BOTONES/Boton_Home.png")); //Falta que primero lo busque y casi de que no eista
+                ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/BOTONES/Boton_Home_copy.png")); //Falta que primero lo busque y casi de que no eista
                 boton.setIcon(new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
                 boton.setText(nombreBotones[i]);
 
@@ -99,7 +102,7 @@ abstract class PanelBase extends JPanel {
                 });
             } else {
                 //Configura el resto de botones laterales
-                boton.setBackground(COLOR_VERDE_PRIMARIO);
+                boton.setBackground(COLOR_IZQUIERDO);
                 boton.setForeground(Color.WHITE);
 
                 //Tamaño de los botones

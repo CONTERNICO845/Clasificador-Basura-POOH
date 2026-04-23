@@ -4,6 +4,11 @@ import javax.swing.*;
 
 public class About_Us extends JPanel{
 
+    //Constantes de colores
+    private static final Color COLOR_VERDE_PRIMARIO = new Color(76, 175, 80);
+    private static final Color COLOR_GRIS_PRIMARIO = new Color(230, 230, 230);
+    private static  final Color COLOR_FONDO_MAIN = new Color(189, 236, 182); 
+
     //Atributos para esta pestaña
     JPanel upPanel;
     JPanel imagePanel;
@@ -18,14 +23,12 @@ public class About_Us extends JPanel{
     //Texto sobre nosotros
     static final int MAX_JLABEL_SIZE = 500;
     String muchoTexto = "<html><p style='width:" + MAX_JLABEL_SIZE + "px;'>" +
-                    "Este es un texto muy largo. Al usar la etiqueta p con un estilo " +
-                    "de ancho fijo, obligamos al JLabel a saltar de línea automáticamente " +
-                    "cuando llegue al límite que definimos. " +
-                    "Es la forma más limpia de mantener un diseño consistente." +
+                    "Somos una union estidiantil de los estados unidos mexicanos (UEEUM) " +
                     "</p></html>";
 
     public About_Us(){
         this.setLayout(new GridLayout(2, 1));
+        this.setBackground(COLOR_FONDO_MAIN);
 
         //Configura el panel superior
         upPanel = new JPanel();
