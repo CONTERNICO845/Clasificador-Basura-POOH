@@ -92,7 +92,7 @@ abstract class PanelBase extends JPanel {
                 boton.setMaximumSize(BUTTON_HOME_SIZE);
 
                 //Le agrega la imagen ☰ al boton
-                ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/BOTONES/Boton_Home_copy.png")); //Falta que primero lo busque y casi de que no eista
+                ImageIcon icon = new ImageIcon(getClass().getResource("Imagenes/BOTONES/Boton_Home.png")); //Falta que primero lo busque y casi de que no eista
                 boton.setIcon(new ImageIcon(icon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
                 boton.setText(nombreBotones[i]);
 
