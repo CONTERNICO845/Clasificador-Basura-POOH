@@ -1,41 +1,69 @@
-
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class Rewards extends JPanel implements ActionListener {
+public class Rewards extends JFrame implements ActionListener {
 
-    // Constantes para los valores de puntos
+    // Constantes para los valores de puntos y créditos
     private static final int PUNTOS_AGREGAR = 50;
     private static final int PUNTOS_CANJEAR = 30;
 
+    private static final int CREDITOS_VERDE = 10;
+    private static final int CREDITOS_AMARILLO = 5;
+    private static final int CREDITOS_ROJO = 2;
+
     private int puntos;
     private int nivel;
+    private int creditosSiiau;
 
     private JLabel labelEstado;
     private JButton btnAgregar;
-    private JButton btnCanjear;
+    private JButton btnRojo, btnAmarillo, btnVerde;
 
     public Rewards() {
         puntos = 0;
         nivel = 1;
+        creditosSiiau = 0;
 
-        setLayout(null);
+        setLayout(new BorderLayout());
 
-        labelEstado = new JLabel("Puntos: " + puntos + " | Nivel: " + nivel);
-        labelEstado.setBounds(50, 30, 250, 30);
-        add(labelEstado);
+        // Estado arriba
+        labelEstado = new JLabel("Puntos: " + puntos + " | Nivel: " + nivel + " | Créditos SIIAU: " + creditosSiiau, SwingConstants.CENTER);
+        add(labelEstado, BorderLayout.NORTH);
 
+        // Botón para agregar puntos
         btnAgregar = new JButton("Agregar " + PUNTOS_AGREGAR + " puntos");
-        btnAgregar.setBounds(50, 80, 200, 30);
         btnAgregar.addActionListener(this);
-        add(btnAgregar);
+        add(btnAgregar, BorderLayout.SOUTH);
 
-        btnCanjear = new JButton("Canjear " + PUNTOS_CANJEAR + " puntos");
-        btnCanjear.setBounds(50, 130, 200, 30);
-        btnCanjear.addActionListener(this);
-        add(btnCanjear);
+        // Panel central con los tres cuadros
+        JPanel panelCuadros = new JPanel(new GridLayout(1, 3, 20, 0));
+        panelCuadros.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        setBounds(0, 0, 350, 250);
+        btnRojo = crearBoton("Canjear", Color.RED);
+        btnAmarillo = crearBoton("Canjear", Color.YELLOW);
+        btnVerde = crearBoton("Canjear", Color.GREEN);
+
+        panelCuadros.add(btnRojo);
+        panelCuadros.add(btnAmarillo);
+        panelCuadros.add(btnVerde);
+
+        add(panelCuadros, BorderLayout.CENTER);
+
+        setTitle("Rewards");
+        setSize(500, 300);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private JButton crearBoton(String texto, Color color) {
+        JButton boton = new JButton(texto);
+        boton.setBackground(color);
+        boton.setOpaque(true);
+        boton.setFont(new Font("Arial", Font.BOLD, 16));
+        boton.addActionListener(this);
+        return boton;
     }
 
     private void verificarNivel() {
@@ -47,7 +75,7 @@ public class Rewards extends JPanel implements ActionListener {
     }
 
     private void actualizarEstado() {
-        labelEstado.setText("Puntos: " + puntos + " | Nivel: " + nivel);
+        labelEstado.setText("Puntos: " + puntos + " | Nivel: " + nivel + " | Créditos SIIAU: " + creditosSiiau);
     }
 
     @Override
@@ -56,15 +84,25 @@ public class Rewards extends JPanel implements ActionListener {
             puntos += PUNTOS_AGREGAR;
             verificarNivel();
             actualizarEstado();
-        } else if (e.getSource() == btnCanjear) {
-            if (puntos >= PUNTOS_CANJEAR) {
-                puntos -= PUNTOS_CANJEAR;
-                JOptionPane.showMessageDialog(this, "Canje exitoso de " + PUNTOS_CANJEAR + " puntos");
-            } else {
-                JOptionPane.showMessageDialog(this, "No tienes suficientes puntos");
-            }
-            actualizarEstado();
+        } else if (e.getSource() == btnRojo) {
+            canjear(CREDITOS_ROJO, "Rojo");
+        } else if (e.getSource() == btnAmarillo) {
+            canjear(CREDITOS_AMARILLO, "Amarillo");
+        } else if (e.getSource() == btnVerde) {
+            canjear(CREDITOS_VERDE, "Verde");
         }
+    }
+
+    private void canjear(int creditos, String color) {
+        if (puntos >= PUNTOS_CANJEAR) {
+            puntos -= PUNTOS_CANJEAR;
+            creditosSiiau += creditos;
+            JOptionPane.showMessageDialog(this,
+                "Canje exitoso en cuadro " + color + ": recibiste " + creditos + " créditos en SIIAU");
+        } else {
+            JOptionPane.showMessageDialog(this, "No tienes suficientes puntos");
+        }
+        actualizarEstado();
     }
 
     public static void main(String[] args) {
