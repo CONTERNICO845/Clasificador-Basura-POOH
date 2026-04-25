@@ -6,8 +6,8 @@ import javax.swing.*;
 abstract class PanelBase extends JPanel {
 
     //Constantes para la ventana
-    private final int ANCHO_PANTALLA = 1920;
-    private final int ALTO_PANTALLA = 1080;
+    public final int ANCHO_PANTALLA = 1920;
+    public final int ALTO_PANTALLA = 1080;
 
     //Constantes para abrir y cerrar la barra lateral
     private boolean extendido = false;

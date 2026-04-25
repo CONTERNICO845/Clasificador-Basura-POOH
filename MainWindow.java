@@ -15,17 +15,19 @@ class MyPanel extends PanelBase {
     }
 }
 
-//Aqui i);nicializa todo
+//Aqui inicializa todo
 public class MainWindow {
 
     public static void main(String[] args) {
         JFrame ventana = new JFrame("Main window");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MyPanel contenido = new MyPanel("Inicio");
 
+        MyPanel contenido = new MyPanel("Inicio");
         ventana.add(contenido);
-        ventana.pack(); // Ajusta la ventana al tamaño del panel
-        ventana.setLocationRelativeTo(null); // Centra la ventana
+
+        ventana.pack();
+        ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
     }
 }
