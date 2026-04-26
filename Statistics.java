@@ -6,34 +6,49 @@ import javax.swing.*;
 class MyPay extends PayChartPanel{
 
     double[] values;
-    private static final Color[] colors = {Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED};
+    public static final Color[] colors = {Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED};
     
     public MyPay(double[] values){
         super(values, colors);
+        this.setPreferredSize(new Dimension(500, 500));
+    }
+}
+
+class MyPayInfo extends PayChartInfo{
+
+    public MyPayInfo(double[] values){
+        super(values, MyPay.colors);
     }
 }
 
 public class Statistics extends JPanel {
 
-    public Statistics(){
-        this.setLayout(new BorderLayout());
+    JPanel rightPanel;
+    JPanel leftPanel;
 
-        double[] values = {40, 30, 20, 15}; //Ejemplo
+    public Statistics(){
+        this.setLayout(new GridLayout(1, 2));
+
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS)); 
+
+        rightPanel = new JPanel();
+        rightPanel.setLayout(new BorderLayout());
+
+        //Por el momento no los pide de la base de datos
+        double[] values = {40, 30, 20, 15};
 
         MyPay myGraphic = new MyPay(values);
-        this.add(myGraphic, BorderLayout.CENTER);
+        MyPayInfo myInfo = new MyPayInfo(values);
+        
+        leftPanel.add(myGraphic);
+        leftPanel.add(myInfo, BorderLayout.CENTER);
+
+        this.add(leftPanel);
+        this.add(rightPanel);
     }
     public static void main(String[] args) {
-        JFrame ventanaDePrueba = new JFrame("Test de Estadísticas - God Giovanni");
-        ventanaDePrueba.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventanaDePrueba.setSize(600, 600);
-        
-        // Creamos nuestro panel y lo metemos en la ventana
-        Statistics panelEstadisticas = new Statistics();
-        ventanaDePrueba.add(panelEstadisticas);
-        
-        // Centramos la ventana en la pantalla y la hacemos visible
-        ventanaDePrueba.setLocationRelativeTo(null);
-        ventanaDePrueba.setVisible(true);
+        Statistics window = new Statistics();
+        window.setVisible(true);
     }
 }
