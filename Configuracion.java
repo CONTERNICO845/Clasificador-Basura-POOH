@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+//HELLOOO
 public class Configuracion extends JPanel implements ActionListener {
 
     // Definimos los botones como variables de clase
