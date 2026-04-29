@@ -44,7 +44,7 @@ public class Rewards extends JPanel implements ActionListener {
         panelCuadros.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // Botón rojo con imagen Homildander
-        btnRojo = crearBoton("Canjear", Color.RED, "imagenes/botorewards/Homildander.jpg");
+        btnRojo = crearBoton("Canjear", Color.RED, "imagenes/botorewards/fiesta-salchichas_2.jpg");
         btnAmarillo = crearBoton("Canjear", Color.YELLOW, null);
         btnVerde = crearBoton("Canjear", Color.GREEN, null);
 
@@ -99,7 +99,7 @@ public class Rewards extends JPanel implements ActionListener {
             if (puntos >= PUNTOS_CANJEAR) {
                 puntos -= PUNTOS_CANJEAR;
                 creditosSiiau += CREDITOS_ROJO;
-                JOptionPane.showMessageDialog(this, "Homelander quiere leche materna");
+                JOptionPane.showMessageDialog(this, "Hot dog con salchicha doble (♥ω♥*) ");
             } else {
                 JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
             }
