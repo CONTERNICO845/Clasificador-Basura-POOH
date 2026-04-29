@@ -9,12 +9,9 @@ public class Rewards extends JPanel implements ActionListener {
     private static final int PUNTOS_CANJEAR = 30;
 
     private static final int CREDITOS_VERDE = 10;
-    private static final int CREDITOS_AMARILLO = 5;
-    private static final int CREDITOS_ROJO = 2;
 
     // Constante para el tamaño de la imagen en los botones
     private static final int TAMANO_IMAGEN = 250;
-
     private int puntos;
     private int nivel;
     private int creditosSiiau;
@@ -43,10 +40,10 @@ public class Rewards extends JPanel implements ActionListener {
         JPanel panelCuadros = new JPanel(new GridLayout(1, 3, 20, 0));
         panelCuadros.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        // Botón rojo con imagen Homildander
+       
         btnRojo = crearBoton("Canjear", Color.RED, "imagenes/botorewards/fiesta-salchichas_2.jpg");
-        btnAmarillo = crearBoton("Canjear", Color.YELLOW, null);
-        btnVerde = crearBoton("Canjear", Color.GREEN, null);
+        btnAmarillo = crearBoton("Canjear", Color.YELLOW, "imagenes/botorewards/Sukumbia.jpg");
+        btnVerde = crearBoton("Canjear", Color.GREEN, "imagenes/botorewards/Dormir.jpg");
 
         panelCuadros.add(btnRojo);
         panelCuadros.add(btnAmarillo);
@@ -98,7 +95,6 @@ public class Rewards extends JPanel implements ActionListener {
         } else if (e.getSource() == btnRojo) {
             if (puntos >= PUNTOS_CANJEAR) {
                 puntos -= PUNTOS_CANJEAR;
-                creditosSiiau += CREDITOS_ROJO;
                 JOptionPane.showMessageDialog(this, "Hot dog con salchicha doble (♥ω♥*) ");
             } else {
                 JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
@@ -106,8 +102,7 @@ public class Rewards extends JPanel implements ActionListener {
         } else if (e.getSource() == btnAmarillo) {
             if (puntos >= PUNTOS_CANJEAR) {
                 puntos -= PUNTOS_CANJEAR;
-                creditosSiiau += CREDITOS_AMARILLO;
-                JOptionPane.showMessageDialog(this, "Canjeaste en el botón amarillo. Recibiste " + CREDITOS_AMARILLO + " créditos.");
+                JOptionPane.showMessageDialog(this, "Te ganaste dos hamburguesas");
             } else {
                 JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
             }
