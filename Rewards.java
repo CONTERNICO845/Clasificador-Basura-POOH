@@ -12,6 +12,9 @@ public class Rewards extends JPanel implements ActionListener {
     private static final int CREDITOS_AMARILLO = 5;
     private static final int CREDITOS_ROJO = 2;
 
+    // Constante para el tamaño de la imagen en los botones
+    private static final int TAMANO_IMAGEN = 250;
+
     private int puntos;
     private int nivel;
     private int creditosSiiau;
@@ -40,9 +43,10 @@ public class Rewards extends JPanel implements ActionListener {
         JPanel panelCuadros = new JPanel(new GridLayout(1, 3, 20, 0));
         panelCuadros.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-        btnRojo = crearBoton("Canjear", Color.RED);
-        btnAmarillo = crearBoton("Canjear", Color.YELLOW);
-        btnVerde = crearBoton("Canjear", Color.GREEN);
+        // Botón rojo con imagen Homildander
+        btnRojo = crearBoton("Canjear", Color.RED, "imagenes/botorewards/Homildander.jpg");
+        btnAmarillo = crearBoton("Canjear", Color.YELLOW, null);
+        btnVerde = crearBoton("Canjear", Color.GREEN, null);
 
         panelCuadros.add(btnRojo);
         panelCuadros.add(btnAmarillo);
@@ -53,8 +57,20 @@ public class Rewards extends JPanel implements ActionListener {
         setSize(500, 300);
     }
 
-    private JButton crearBoton(String texto, Color color) {
+    private JButton crearBoton(String texto, Color color, String rutaImagen) {
         JButton boton = new JButton(texto);
+
+        if (rutaImagen != null) {
+            ImageIcon icono = new ImageIcon(rutaImagen);
+            // Escalar la imagen al tamaño definido en la constante
+            Image img = icono.getImage().getScaledInstance(TAMANO_IMAGEN, TAMANO_IMAGEN, Image.SCALE_SMOOTH);
+            boton.setIcon(new ImageIcon(img));
+
+            // Texto debajo de la imagen
+            boton.setHorizontalTextPosition(SwingConstants.CENTER);
+            boton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        }
+
         boton.setBackground(color);
         boton.setOpaque(true);
         boton.setFont(new Font("Arial", Font.BOLD, 16));
@@ -79,30 +95,39 @@ public class Rewards extends JPanel implements ActionListener {
         if (e.getSource() == btnAgregar) {
             puntos += PUNTOS_AGREGAR;
             verificarNivel();
-            actualizarEstado();
         } else if (e.getSource() == btnRojo) {
-            canjear(CREDITOS_ROJO, "Rojo");
+            if (puntos >= PUNTOS_CANJEAR) {
+                puntos -= PUNTOS_CANJEAR;
+                creditosSiiau += CREDITOS_ROJO;
+                JOptionPane.showMessageDialog(this, "Homelander quiere leche materna");
+            } else {
+                JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
+            }
         } else if (e.getSource() == btnAmarillo) {
-            canjear(CREDITOS_AMARILLO, "Amarillo");
+            if (puntos >= PUNTOS_CANJEAR) {
+                puntos -= PUNTOS_CANJEAR;
+                creditosSiiau += CREDITOS_AMARILLO;
+                JOptionPane.showMessageDialog(this, "Canjeaste en el botón amarillo. Recibiste " + CREDITOS_AMARILLO + " créditos.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
+            }
         } else if (e.getSource() == btnVerde) {
-            canjear(CREDITOS_VERDE, "Verde");
-        }
-    }
-
-    private void canjear(int creditos, String color) {
-        if (puntos >= PUNTOS_CANJEAR) {
-            puntos -= PUNTOS_CANJEAR;
-            creditosSiiau += creditos;
-            JOptionPane.showMessageDialog(this,
-                "Canje exitoso en cuadro " + color + ": recibiste " + creditos + " créditos en SIIAU");
-        } else {
-            JOptionPane.showMessageDialog(this, "No tienes suficientes puntos");
+            if (puntos >= PUNTOS_CANJEAR) {
+                puntos -= PUNTOS_CANJEAR;
+                creditosSiiau += CREDITOS_VERDE;
+                JOptionPane.showMessageDialog(this, "Canjeaste en el botón verde. Recibiste " + CREDITOS_VERDE + " créditos.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Te faltan " + (PUNTOS_CANJEAR - puntos) + " puntos para canjear.");
+            }
         }
         actualizarEstado();
     }
 
+    // Método main para probar la interfaz
     public static void main(String[] args) {
-        Rewards ventana = new Rewards();
-        ventana.setVisible(true);
+        JFrame frame = new JFrame("Rewards");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(new Rewards());
+        frame.setVisible(true);
     }
 }
