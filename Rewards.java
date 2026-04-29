@@ -40,7 +40,7 @@ public class Rewards extends JPanel implements ActionListener {
         JPanel panelCuadros = new JPanel(new GridLayout(1, 3, 20, 0));
         panelCuadros.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
-       
+        
         btnRojo = crearBoton("Canjear", Color.RED, "imagenes/botorewards/fiesta-salchichas_2.jpg");
         btnAmarillo = crearBoton("Canjear", Color.YELLOW, "imagenes/botorewards/Sukumbia.jpg");
         btnVerde = crearBoton("Canjear", Color.GREEN, "imagenes/botorewards/Dormir.jpg");

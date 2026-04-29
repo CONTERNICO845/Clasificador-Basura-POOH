@@ -21,6 +21,13 @@ class MyPayInfo extends PayChartInfo{
     }
 }
 
+class MyPodium extends Podium{
+
+    public MyPodium(){
+
+    }
+}
+
 public class Statistics extends JPanel {
 
     JPanel rightPanel;
@@ -40,9 +47,13 @@ public class Statistics extends JPanel {
 
         MyPay myGraphic = new MyPay(values);
         MyPayInfo myInfo = new MyPayInfo(values);
+        MyPodium myPodium = new MyPodium();
         
         leftPanel.add(myGraphic);
         leftPanel.add(myInfo, BorderLayout.CENTER);
+
+        //Agrega la parte de la derecha
+        rightPanel.add(myPodium);
 
         this.add(leftPanel);
         this.add(rightPanel);

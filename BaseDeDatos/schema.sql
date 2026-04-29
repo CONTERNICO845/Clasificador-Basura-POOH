@@ -10,5 +10,6 @@ CREATE TABLE users (
     glass INT DEFAULT 0,
     plastic INT DEFAULT 0,
     metal INT DEFAULT 0,
-    hard_to_recycle INT DEFAULT 0
+    hard_to_recycle INT DEFAULT 0,
+    user_photo INT DEFAULT 0,
 );

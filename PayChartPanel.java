@@ -18,6 +18,7 @@ abstract class PayChartPanel extends JPanel {
         this.colors = colors;
 
         this.setPreferredSize(new Dimension(550, 500));
+        this.setBackground(AppColors.COLOR_FONDO_MAIN);
     }
 
     @Override
@@ -54,7 +55,9 @@ abstract class PayChartInfo extends JPanel {
     int squareSize = 30;
 
     public PayChartInfo(double[] values, Color[] colors) {
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(AppColors.COLOR_FONDO_MAIN);
 
         for (int i = 0; i < PayChartPanel.names.length; i++) {
 
@@ -77,6 +80,42 @@ abstract class PayChartInfo extends JPanel {
 
             this.add(line);
             line.setVisible(true);
+        }
+    }
+}
+
+abstract class Podium extends JPanel{
+
+    public static final int peopleAmount = 5;
+
+    public Podium(){
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(AppColors.COLOR_FONDO_MAIN);
+
+        JPanel podium = new JPanel();
+        podium.setLayout(new BoxLayout(podium, BoxLayout.Y_AXIS));
+        podium.setMaximumSize(new Dimension(300, 500));
+        podium.setBackground(AppColors.COLOR_BOTONES);
+
+        for(int i = 1; i <=peopleAmount; i++){
+
+            JLabel place = new JLabel("#" + i);
+            place.setFont(new Font("SansSerif", Font.BOLD, 26));
+
+            //Label para el nombre de usuario, falta por la base de datos
+
+            //Puntos igual faltan por la base de datos
+
+            //Crea el panel de cada usuario
+            JPanel users = new JPanel();
+            users.setLayout(new BoxLayout(users, BoxLayout.X_AXIS));
+            users.add(place);
+
+            podium.add(users);
+            this.add(podium);
+
+            users.setVisible(true);
         }
     }
 }
