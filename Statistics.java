@@ -32,15 +32,27 @@ public class Statistics extends JPanel {
 
     JPanel rightPanel;
     JPanel leftPanel;
+    JButton share;
+    JPanel buttonPanel;
 
     public Statistics(){
         this.setLayout(new GridLayout(1, 2));
 
         leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS)); 
+        leftPanel.setBackground(AppColors.COLOR_MAIN_BACKGROUND);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
+        rightPanel.setBackground(AppColors.COLOR_MAIN_BACKGROUND);
+
+        //Panel que contendra el boton de share
+        buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 30, 0));
+
+        share = new JButton("Compartir");
 
         //Por el momento no los pide de la base de datos
         double[] values = {40, 30, 20, 15};
@@ -53,7 +65,9 @@ public class Statistics extends JPanel {
         leftPanel.add(myInfo, BorderLayout.CENTER);
 
         //Agrega la parte de la derecha
-        rightPanel.add(myPodium);
+        rightPanel.add(myPodium, BorderLayout.CENTER);
+        rightPanel.add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(share);
 
         this.add(leftPanel);
         this.add(rightPanel);
