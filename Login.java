@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 import javax.swing.*;
 
 public class Login extends JFrame {
@@ -236,14 +237,21 @@ public class Login extends JFrame {
                 }
 
                 // Verifica que el campo sean valido de contaseña
-                if (pass.isEmpty() || pass.length() < 8) {
+                if (pass.isEmpty() ||
+                 pass.length() < 8) {
                     JOptionPane.showMessageDialog(Login.this, "Su contraseña es inválida", "Aviso",
                             JOptionPane.WARNING_MESSAGE);
                     return;
                 }
 
+                // Agregamos un valor aleatrio y lo convertimos a String para que sea mas facil
+                // su uso en las imagenes
+                Random rand = new Random();
+                int randomValue = rand.nextInt(6);
+                String randomString = String.valueOf(randomValue);
+
                 Consultas consultas = new Consultas();
-                consultas.registrarUsuario(correo, pass, userName);
+                consultas.registrarUsuario(correo, pass, userName, randomString);
 
                 JOptionPane.showMessageDialog(Login.this, "Registrado",
                         "Registro Exitoso", JOptionPane.INFORMATION_MESSAGE);

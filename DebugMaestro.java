@@ -4,12 +4,12 @@ import java.sql.Statement;
 
 public class DebugMaestro {
     public static void main(String[] args) {
-        System.out.println("===========================================================================================");
+        System.out.println("===============================================================================================");
         System.out.println("🚀 SISTEMA DE DEPURACIÓN TOTAL - EQUIPO MCQUACK");
-        System.out.println("===========================================================================================");
+        System.out.println("===============================================================================================");
 
-        // 1. Verificación de la conexión física en Arch Linux 
-        System.out.print("1. Conectando a BaseDeDatos/clasificador.db... ");
+        // 1. Verificación de la conexión física
+        System.out.print("1. Buscando base de datos en Arch Linux... ");
         try (Connection conn = DatabaseConnection.conectar()) {
             
             if (conn == null) {
@@ -20,22 +20,24 @@ public class DebugMaestro {
 
             Statement stmt = conn.createStatement();
             
-            // 2. Tabla de usuarios con todas las estadísticas de reciclaje
-            System.out.println("\n2. REPORTE COMPLETO DE USUARIOS Y RECICLAJE:");
-            System.out.println("---------------------------------------------------------------------------------------------------------");
-            // Formato: ID | EMAIL | PASS | FECHA | PTS | VID | PLA | MET | DIF
-            System.out.printf("%-3s | %-20s | %-10s | %-10s | %-4s | %-3s | %-3s | %-3s | %-3s\n", 
-                              "ID", "EMAIL", "PASS", "FECHA", "PTS", "VID", "PLA", "MET", "DIF");
-            System.out.println("---------------------------------------------------------------------------------------------------------");
+            // 2. Reporte con columnas ajustadas para ver PASS y USER_NAME
+            System.out.println("\n2. REPORTE COMPLETO DE USUARIOS (VERIFICACIÓN DE CAMBIOS):");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+            // Ajustamos el formato: ID | NOMBRE | EMAIL | PASS (más espacio) | PTS | VID | PLA | MET | DIF
+            System.out.printf("%-3s | %-12s | %-20s | %-15s | %-4s | %-3s | %-3s | %-3s | %-3s\n", 
+                              "ID", "USUARIO", "EMAIL", "PASSWORD", "PTS", "VID", "PLA", "MET", "DIF");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");
             int contador = 0;
+            
             while (rs.next()) {
-                System.out.printf("%-3d | %-20s | %-10s | %-10s | %-4d | %-3d | %-3d | %-3d | %-3d\n",
+                // Extraemos cada valor de la fila actual
+                System.out.printf("%-3d | %-12s | %-20s | %-15s | %-4d | %-3d | %-3d | %-3d | %-3d\n",
                                   rs.getInt("id"),
+                                  rs.getString("user_Name"),
                                   rs.getString("email"),
-                                  rs.getString("password"),
-                                  rs.getString("creation_date"),
+                                  rs.getString("password"), // Aquí verás si el cambio de pass funcionó
                                   rs.getInt("points"),
                                   rs.getInt("glass"),
                                   rs.getInt("plastic"),
@@ -44,13 +46,16 @@ public class DebugMaestro {
                 contador++;
             }
             
-            System.out.println("---------------------------------------------------------------------------------------------------------");
-            System.out.println("📊 Total de usuarios en el sistema: " + contador);
-            System.out.println("\n✅ Depuración finalizada para Geovani Gael Carmona Barbosa. ");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------");
+            System.out.println("📊 Total de registros encontrados: " + contador);
+            System.out.println("\n✅ Depuración finalizada con éxito.");
+            System.out.println("👤 Desarrollador: Geovani Gael Carmona Barbosa");
 
         } catch (Exception e) {
             System.err.println("\n❌ FALLO CRÍTICO EN EL DEBUG:");
-            e.printStackTrace();
+            System.err.println("Mensaje: " + e.getMessage());
+            // Mostramos el stack trace solo si es necesario para no ensuciar la terminal
+            // e.printStackTrace(); 
         }
     }
 }
