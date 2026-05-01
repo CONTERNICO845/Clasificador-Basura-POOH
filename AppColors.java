@@ -8,4 +8,5 @@ public class AppColors {
     public static final Color COLOR_MAIN_BACKGROUND = new Color(189, 236, 182); 
     public static final Color COLOR_WHITE = new Color(255, 255, 255);
     public static final Color COLOR_BLACK = new Color(0, 0, 0);
+    public static final Color COLOR_GREEN_CLARO = new Color(13, 255, 0);
 }
