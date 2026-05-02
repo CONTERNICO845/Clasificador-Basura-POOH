@@ -40,7 +40,7 @@ abstract class PayChartPanel extends JPanel {
                 repaint(); 
             }
         });
-        timer.setInitialDelay(1000);
+        timer.setInitialDelay(100);
         
         // Arrancamos la animación
         timer.start();
@@ -146,13 +146,21 @@ abstract class Podium extends JPanel{
             place.setOpaque(false);
 
             //Label para el nombre de usuario, falta por la base de datos
+            JLabel name = new JLabel("  Nombre XD");
+            name.setFont(new Font("SansSerif", Font.BOLD, 20));
+            name.setForeground(AppColors.COLOR_WHITE);
 
             //Puntos igual faltan por la base de datos
+            JLabel points = new JLabel("  67");
+            points.setFont(new Font("SansSerif", Font.BOLD, 20));
+            points.setForeground(AppColors.COLOR_WHITE);
 
             //Crea el panel de cada usuario
             JPanel users = new JPanel();
             users.setLayout(new BoxLayout(users, BoxLayout.X_AXIS));
             users.add(place);
+            users.add(name);
+            users.add(points);
             users.setOpaque(false);
 
             //Deja un espacio

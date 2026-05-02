@@ -6,7 +6,7 @@ public class Configuracion extends JPanel implements ActionListener {
 
     // Definimos los botones como variables de clase
     private JButton btnOpcion1, btnOpcion2, btnOpcion3;
-    private boolean esModoObscuro = false; 
+    public static boolean esModoObscuro = false; 
 
 //JAJAJAJAJAJ no me dio risa 
     public Configuracion() {

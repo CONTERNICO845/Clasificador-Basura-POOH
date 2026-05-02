@@ -1,4 +1,5 @@
 //Codigo hecho por el God Giovanni Sandoval
+
 import java.awt.*;
 import javax.swing.*;
 
@@ -14,7 +15,7 @@ abstract class PanelBase extends JPanel {
     private final int CLOSED_WIDTH = 50;
     private final int OPEN_WIDTH = 200;
     //private Timer timerAnimacion; por el momento 
-    
+
     //Variables para los botones
     Dimension BUTTON_HOME_SIZE = new Dimension(50, 50);
     Dimension NORMAL_BUTTON_SIZE = new Dimension(230, 50);
@@ -36,20 +37,28 @@ abstract class PanelBase extends JPanel {
 
         //Configura el panel principal donde se trabajra cada ventana
         mainPanel = new JPanel();
-        mainPanel.setBackground(Color.WHITE);
-        mainPanel.setLayout(new CardLayout());
+        mainPanel.setLayout(new BorderLayout());
         this.add(mainPanel, BorderLayout.CENTER);
+        if (Configuracion.esModoObscuro == false) {
+            mainPanel.setBackground(Color.WHITE);
+        } else if (Configuracion.esModoObscuro == true) {
+            //Aun nada
+        }
 
         //Configura el panel superior del titulo y perfil
         topPanel = new JPanel();
-        topPanel.setBackground(AppColors.COLOR_DARK_BACKGROUND);
         topPanel.setLayout(new BorderLayout());
         this.add(topPanel, BorderLayout.NORTH);
+        if (Configuracion.esModoObscuro == false) {
+            topPanel.setBackground(AppColors.COLOR_DARK_BACKGROUND);
+        } else if (Configuracion.esModoObscuro == true) {
+            //Aun nada
+        }
 
         //Configura un titulo para todas las ventanas
         title = new JLabel(titleText, SwingConstants.CENTER);
         title.setFont(new Font("SansSerif", Font.BOLD, 26));
-        title.setForeground(new Color(255, 255, 255)); 
+        title.setForeground(new Color(255, 255, 255));  //Tal vez cambie el color
         title.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
         topPanel.add(title, BorderLayout.CENTER);
 
@@ -59,7 +68,7 @@ abstract class PanelBase extends JPanel {
         perfilButton = new JButton();
         perfilButton.setOpaque(false);
         perfilButton.setContentAreaFilled(false);
-        //botonPerfil.setBorderPainted(false);     hasta que tenga una imagen sera false
+        perfilButton.setBorderPainted(false);
         perfilButton.setPreferredSize(new Dimension(60, 50));
         //Aqui debe de ir la ruta de la imagen
         topPanel.add(perfilButton, BorderLayout.EAST);
@@ -67,9 +76,13 @@ abstract class PanelBase extends JPanel {
         //Configura le panel lateral con las opciones
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setBackground(AppColors.COLOR_DARK_BACKGROUND);
         sidePanel.setPreferredSize(new Dimension(CLOSED_WIDTH, 0));
         this.add(sidePanel, BorderLayout.WEST);
+        if (Configuracion.esModoObscuro == false) {
+            sidePanel.setBackground(AppColors.COLOR_DARK_BACKGROUND);
+        } else if (Configuracion.esModoObscuro == true) {
+            //Aun no hay color
+        }
 
         //Configura los botones del panel lateral
         for (int i = 0; i < buttonNames.length; i++) {
@@ -97,8 +110,12 @@ abstract class PanelBase extends JPanel {
                 });
             } else {
                 //Configura el resto de botones laterales
-                boton.setBackground(AppColors.COLOR_MAIN_BUTTONS);
-                boton.setForeground(Color.WHITE);
+                if (Configuracion.esModoObscuro == false) {
+                    boton.setBackground(AppColors.COLOR_MAIN_BUTTONS);
+                    boton.setForeground(Color.WHITE);
+                } else if (Configuracion.esModoObscuro == true) {
+                    //Aun no tenemos colores
+                }
 
                 //Tamaño de los botones
                 boton.setMinimumSize(NORMAL_BUTTON_SIZE);
@@ -106,7 +123,7 @@ abstract class PanelBase extends JPanel {
 
                 //Añade eventos al presioar los botones
                 boton.addActionListener(e -> {
-                System.out.println("¡Botón presionado: " + nombre + "!");
+                    System.out.println("¡Botón presionado: " + nombre + "!");
                     choosePanel(nombre);
                 });
 
@@ -119,12 +136,12 @@ abstract class PanelBase extends JPanel {
 
             //Agrega espacios entre los botones
             if (i < buttonNames.length - 1) {
-            Component space = Box.createRigidArea(RIGIDAREA_SIZE);
-            space.setVisible(isExpanded); // Se oculta o muestra según el estado inicial
-            sidePanel.add(space);
+                Component space = Box.createRigidArea(RIGIDAREA_SIZE);
+                space.setVisible(isExpanded); // Se oculta o muestra según el estado inicial
+                sidePanel.add(space);
 
-            boton.setFocusPainted(false);
-        }
+                boton.setFocusPainted(false);
+            }
         }
     }
 
@@ -154,11 +171,39 @@ abstract class PanelBase extends JPanel {
 
     //Metodo que cambia entre ventanas en el panel principal
     private void choosePanel(String screenName) {
-        CardLayout cl = (CardLayout) (mainPanel.getLayout());
         
-        cl.show(mainPanel, screenName);
+        mainPanel.removeAll();
+        JPanel newScreen = null;
 
-        String panelBaseName = screenName;
-        title.setText(panelBaseName);
+        switch (screenName){
+            case "Inicio":
+
+                break;
+            case "Estadisticas":
+                newScreen = new Statistics();
+                break;
+            case "Rewards":
+                newScreen = new Rewards();
+                break;
+            case "Mapa":
+                break;
+            case "Cuenta":
+                break;
+            case "Configuracion":
+                newScreen = new Configuracion();
+                break;
+            case "About Us":
+                newScreen = new About_Us();
+                break;
+            default:
+                newScreen = new JPanel();
+                break;
+        }
+
+        mainPanel.add(newScreen, BorderLayout.CENTER);
+        title.setText(screenName);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 }

@@ -8,16 +8,12 @@ class MyPanel extends PanelBase {
 
         //Para todas las ventanas, las agrega a un Cardlayout para poderlas intercambiar una a una
         Statistics estadisticasPanel = new Statistics();
-        mainPanel.add(estadisticasPanel, "Estadisticas");
 
         Rewards rewardsPanel = new Rewards();
-        mainPanel.add(rewardsPanel, "Rewards");
 
         About_Us aboutUsPanel = new About_Us();
-        mainPanel.add(aboutUsPanel, "About Us");
 
         Configuracion configuracionPanel = new Configuracion();
-        mainPanel.add(configuracionPanel, "Configuracion");
     }
 }
 

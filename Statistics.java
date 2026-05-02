@@ -54,6 +54,8 @@ public class Statistics extends JPanel {
 
         //Boton para compartir
         share = new JButton("Compartir");
+        share.setBackground(AppColors.COLOR_MAIN_BUTTONS);
+        share.setForeground(AppColors.COLOR_WHITE);
         share.setFocusPainted(false);
         share.addActionListener(e -> {
             //Falta ponerle accion
@@ -78,6 +80,7 @@ public class Statistics extends JPanel {
         this.add(leftPanel);
         this.add(rightPanel);
     }
+
     public static void main(String[] args) {
         Statistics window = new Statistics();
         window.setVisible(true);

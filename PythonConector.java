@@ -26,7 +26,7 @@ public class PythonConector{
             while ((linea = br.readLine()) != null) {
                 answer.append(linea.trim());
 
-                System.out.println(answer); //wefcsadvsaf 
+                System.out.println(answer);
             }
 
             return answer.toString();
