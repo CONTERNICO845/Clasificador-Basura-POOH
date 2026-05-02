@@ -125,11 +125,9 @@ abstract class Podium extends JPanel{
 
     public static final int peopleAmount = 10;
 
-    public Podium(){
-
+    public Podium() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(AppColors.COLOR_MAIN_BACKGROUND);
-
         this.add(Box.createVerticalStrut(100));
 
         JPanel podium = new JPanel();
@@ -138,36 +136,38 @@ abstract class Podium extends JPanel{
         podium.setBackground(AppColors.COLOR_MAIN_BUTTONS);
         podium.setBorder(BorderFactory.createLineBorder(AppColors.COLOR_WHITE, 5));
 
-        for(int i = 1; i <=peopleAmount; i++){
+        //Llamamos al método que ahora nos devuelve los datos organizados
+        String[][] topUsuarios = Consultas.getTopTenUsers();
 
-            JLabel place = new JLabel("#" + i);
+        for (int i = 0; i < peopleAmount; i++) {
+            
+            // ponemos guiones para que la interfaz no se vea vacía.
+            String UsersName = (topUsuarios[i][0] != null) ? topUsuarios[i][0] : "---";
+            String usersPoints = (topUsuarios[i][1] != null) ? topUsuarios[i][1] : "0";
+
+            JLabel place = new JLabel("#" + (i + 1));
             place.setFont(new Font("SansSerif", Font.BOLD, 26));
             place.setForeground(AppColors.COLOR_WHITE);
-            place.setOpaque(false);
 
-            //Label para el nombre de usuario, falta por la base de datos
-            JLabel name = new JLabel("  Nombre XD");
+            //Usamos las variables
+            JLabel name = new JLabel("  " + UsersName);
             name.setFont(new Font("SansSerif", Font.BOLD, 20));
             name.setForeground(AppColors.COLOR_WHITE);
 
-            //Puntos igual faltan por la base de datos
-            JLabel points = new JLabel("  67");
+            JLabel points = new JLabel("  " + usersPoints);
             points.setFont(new Font("SansSerif", Font.BOLD, 20));
             points.setForeground(AppColors.COLOR_WHITE);
 
-            //Crea el panel de cada usuario
             JPanel users = new JPanel();
             users.setLayout(new BoxLayout(users, BoxLayout.X_AXIS));
+            users.setOpaque(false);
+            
             users.add(place);
             users.add(name);
             users.add(points);
-            users.setOpaque(false);
 
-            //Deja un espacio
             podium.add(Box.createVerticalStrut(15));
-
             podium.add(users);
-            users.setVisible(true);
         }
 
         this.add(podium);

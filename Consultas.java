@@ -488,32 +488,32 @@ public class Consultas {
 
     // Consulta del top 10 usarios con mas puntos
     // "1% yo alias CONTENRICO y 99% IA alias Gemini"
-    public void getTopTenUsers() {
+    public static String[][] getTopTenUsers() {
+        // Creamos una matriz de 10 filas por 2 columnas (Nombre y Puntos)
+        String[][] top10 = new String[10][2]; 
+
         try (Connection conn = DatabaseConnection.conectar();
-                Statement stmt = conn.createStatement()) {
+            Statement stmt = conn.createStatement()) {
 
-            if (conn == null)
-                return;
+            if (conn != null) {
+                String query = "SELECT user_Name, points FROM users ORDER BY points DESC LIMIT 10";
+                ResultSet rs = stmt.executeQuery(query);
 
-            // Consultamos el nombre y puntos, ordenando de forma descendente (DESC) y
-            // limitando a 10
-            String query = "SELECT user_Name, points FROM users ORDER BY points DESC LIMIT 10";
-            ResultSet rs = stmt.executeQuery(query);
-
-            System.out.println("--- TOP 10 USUARIOS ---");
-            int rank = 1;
-
-            while (rs.next()) {
-                String name = rs.getString("user_Name");
-                int points = rs.getInt("points");
-                System.out.println(rank + ". " + name + " - " + points + " puntos");
-                rank++;
+                int index = 0;
+                // CAMBIO 5: Eliminé los System.out.println. 
+                // Ahora guardamos los valores directo en nuestra matriz 'top10'
+                while (rs.next() && index < 10) {
+                    top10[index][0] = rs.getString("user_Name"); 
+                    top10[index][1] = String.valueOf(rs.getInt("points")); 
+                    index++;
+                }
             }
-            System.out.println("-----------------------");
-
         } catch (Exception e) {
             System.out.println("Error al consultar el top 10: " + e.getMessage());
         }
+        
+        // CAMBIO 6: Regresamos la información para que el constructor la use
+        return top10; 
     }
 
 }
