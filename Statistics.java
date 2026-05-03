@@ -6,7 +6,7 @@ import javax.swing.*;
 class MyPay extends PayChartPanel{
 
     double[] values;
-    public static final Color[] colors = {Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.CYAN, Color.ORANGE};
+    public static final Color[] colors = {Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED, Color.CYAN, Color.MAGENTA};
     
     public MyPay(double[] values){
         super(values, colors);
