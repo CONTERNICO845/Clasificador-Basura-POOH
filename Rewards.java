@@ -34,7 +34,6 @@ public class Rewards extends JPanel implements ActionListener {
 
         panelCuadros = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 20));
 
-        // Usa rutas con "/" inicial porque están en ClasificadorJava/Imagenes
         btnRojo = crearBoton("Canjear 50 puntos. AFresca (mdn)", Color.RED, "/Imagenes/Botorewards/Aguafresca.png"); 
         btnRojo.setPreferredSize(new Dimension(300, 300));
 
@@ -189,4 +188,4 @@ public class Rewards extends JPanel implements ActionListener {
         frame.setVisible(true);
         rewardsPanel.DarkMode();
     }
-}
+}//110 % hecho por inteligencia humana
